@@ -1,0 +1,15 @@
+language: cpp
+compiler:
+  - clang
+  - gcc
+addons:
+  apt:
+    packages:
+    - python-pip
+    - libibus-1.0-dev
+before_script:
+  - pip install cpplint
+script:
+  - g++ --version
+  - cpplint *
+  - gcc levena.c $(pkg-config ibus-1.0 --cflags --libs)
