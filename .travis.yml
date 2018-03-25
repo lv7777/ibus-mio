@@ -9,6 +9,7 @@ addons:
     packages:
     - python-pip
     - libibus-1.0-dev
+    - gtk+-2.0
 before_script:
   - pip install --user cpplint
   - nvm install 4.6.0
