@@ -14,5 +14,5 @@ before_script:
   - pip install --user cpplint
 script:
   - g++ --version
-  - cpplint *
+  - cpplint --linelength=100 --filter=-readability/casting *
   - gcc levena.c $(pkg-config ibus-1.0 --cflags --libs)
