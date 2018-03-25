@@ -13,10 +13,6 @@ addons:
     - gtk+-2.0
     - xvfb
 #   xvfb is need open display(electron,gtktes)
-install:
-  - export DISPLAY=':99.0'
-  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-# above 2 setting is need open
 before_script:
   - pip install --user cpplint
   - nvm install 4.6.0
