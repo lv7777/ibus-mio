@@ -1,6 +1,5 @@
 language: cpp
 compiler:
-  - clang
   - gcc
 branches:
   only: 
@@ -12,7 +11,10 @@ addons:
     - libibus-1.0-dev
 before_script:
   - pip install --user cpplint
+  - nvm install 4.6.0
+  - cd settings && npm install && cd ../
 script:
   - g++ --version
   - cpplint --linelength=100 --filter=-readability/casting *
   - gcc levena.c $(pkg-config ibus-1.0 --cflags --libs)
+  - make build && ./release
