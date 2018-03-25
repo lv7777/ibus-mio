@@ -11,7 +11,7 @@ addons:
     - python-pip
     - libibus-1.0-dev
 before_script:
-  - pip install cpplint
+  - pip install --user cpplint
 script:
   - g++ --version
   - cpplint *
