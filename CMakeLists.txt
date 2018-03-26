@@ -1,2 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.6)
+project(Hello C)
 add_executable(release gtktes.c)
+find_package(GTK2 REQUIRED)
+include_directories(${GTK2_INCLUDE_DIRS})
+target_link_libraries(relsease ${GTK2_LIBRARIES})
