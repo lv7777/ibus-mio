@@ -22,5 +22,5 @@ script:
   - cpplint --linelength=100 --filter=-readability/casting *
   - gcc levena.c $(pkg-config ibus-1.0 --cflags --libs)
   - make build
-  - xvfb-run ./release
+ # - xvfb-run ./release
   - cd settings && npm test
