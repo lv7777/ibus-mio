@@ -14,3 +14,8 @@
 # author
 
 lv7777
+
+# modan buildtools
+cmake+ninja
+
+apt-get install ninja-build cmake
