@@ -4,7 +4,7 @@ compiler:
 sudo: false
 branches:
   only: 
-    - ci
+    - master
 addons:
   apt:
     packages:
