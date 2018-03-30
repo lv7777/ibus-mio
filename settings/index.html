@@ -82,7 +82,7 @@
           contenteditable
           @click.shift.exact="selectanddeletethisentry(entry,trindex)"
           @click.ctrl.exact="changevalue(trindex)"
-          @blur="savedb(entry)"
+          @blur="savedb(trindex,key)"
           >
             {{entry[key]}}
           </td>
@@ -157,8 +157,10 @@
         selectanddeletethisentry: function(key,i){
             console.log(demo)
         },
-        savedb: function(entry){
+        savedb: function(entry,key){
             console.log("write save code")
+            demo.gridData[entry][key]=window.event.target.innerText
+            console.log(demo.gridData)
         },
          changevalue: function(index){
             window.event.target.parentElement.classList.toggle("bg-info");
