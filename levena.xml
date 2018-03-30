@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- filename:levena.xml -->
 <component>
-    <name>org.freedesktop.IBus.levena</name>
-    <description>IBus-levena engine component</description>
-    <exec>/home/levena/levena/a.out</exec>
+    <name>org.freedesktop.IBus.mio</name>
+    <description>IBus-mio engine component</description>
+    <exec>/usr/libexec/ibus-engine-mio</exec>
     <version>0.0.0</version>
     <author>ryouyu oonuma (aka lv7777)</author>
     <license>MPL-2.0</license>
@@ -12,11 +12,11 @@
 
     <engines>
         <engine>
-            <name>ibus-levena</name>
+            <name>mio</name>
             <language>ja</language>
             <license>MPL-2.0</license>
             <author>ryouyu oonuma (aka lv7777)</author>
-            <icon></icon>
+            <icon>/usr/share/ibus/component/hinata.jpg</icon>
             <layout>jp</layout>
             <longname>Levena</longname>
             <description>IBus Levena Input Method</description>

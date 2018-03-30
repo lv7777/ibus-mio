@@ -10,3 +10,6 @@ target_link_libraries(ibus-setup-mio ${GTK2_LIBRARIES})
 pkg_check_modules(IBUS1 ibus-1.0 REQUIRED)
 include_directories(${IBUS1_INCLUDE_DIRS})
 target_link_libraries(mio ${IBUS1_LIBRARIES})
+
+install(FILES hinata.jpg DESTINATION /usr/share/ibus/component/ RENAME ibus-mio.jpg)
+install(FILES levena.xml DESTINATION /usr/share/ibus/component/ RENAME mio.xml)
