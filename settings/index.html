@@ -78,7 +78,12 @@
       </thead>
       <tbody>
         <tr v-for="entry in filteredData">
-          <td v-for="key in columns">
+          <td v-for="key in columns"
+          contenteditable
+          @keyup.delete="selectanddeletethisentry(entry)"
+          @click.ctrl.exact="changevalue"
+          @blur="savedb(entry)"
+          >
             {{entry[key]}}
           </td>
         </tr>
@@ -148,6 +153,23 @@
         sortBy: function (key) {
           this.sortKey = key
           this.sortOrders[key] = this.sortOrders[key] * -1
+        },
+        selectanddeletethisentry: function(entry){
+            console.log("aaa")
+        },
+        savedb: function(entry){
+            console.log("write save code")
+        },
+        // changevalue: function(value,key,ev){
+        changevalue: function(ev){
+            //document.getElementById('').getAttribute('sampleAttr');
+            console.log(ev)
+            ev.target.parentElement.className="bg-info"
+            this.items.splice(2,1)
+            //Vue.delete(this.gridData, 2);
+            //this.gridData.$remove(3);
+            console.log(ev.target.parentElement.className)
+            //this.contenteditable='true'
         }
       }
     })
