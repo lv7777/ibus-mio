@@ -11,6 +11,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <title>IBus-MIO Settings</title>
+    <style>
+    #footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    margin: 10px 20px 10px;
+    text-align: right;
+    right: 0px;
+    }
+    .remrem{
+        margin-bottom:0.7rem;
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -36,7 +50,42 @@
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/photo3.jpg" alt="" class="img-fluid">
                 </div>
                 <div id="userdic" class="tab-pane">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/photo4.jpg" alt="" class="img-fluid">
+                        <div class="starter-template mx-auto text-center"> 
+                            <div style="margin: 10px 0px 10px 0px;">
+                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">import</button>
+                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">export</button>
+                            </div>
+
+                                <table class="table table-sm">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                        </div>
                 </div>
                 <div id="about" class="tab-pane active">
                                 <div style="margin: 10px 0px 0px 0px;" class="starter-template mx-auto text-center"> 
@@ -46,13 +95,17 @@
                                 
                                 <img style="width: 30%; height: 30%;" src="https://pbs.twimg.com/profile_images/1543618362/14___13___34___400x400.png" class="rounded mx-auto d-block" alt="...">
                                 <p class="text-center">如月 澪</p>
-                                <p class="text-center text-primary"><a href="https://github.com/lv7777/ibus-mio">Go To Repo</a></p>
-                                <p class="text-center text-primary"><a href="https://github.com/lv7777/ibus-mio">User's Manual</a></p>
-                                <p class="text-center text-primary"><a href="https://github.com/lv7777/ibus-mio">Buy a Coffee for Developer</a></p>
+                                <p class="text-center text-primary remrem"><a href="https://github.com/lv7777/ibus-mio">Go To Repo</a></p>
+                                <p class="text-center text-primary remrem"><a href="https://github.com/lv7777/ibus-mio">User's Manual</a></p>
+                                <p class="text-center text-primary remrem"><a href="https://github.com/lv7777/ibus-mio">Buy a Coffee for Developer</a></p>
                         <!-- </main> -->
                     </div>
                 </div>
             <!-- </div> -->
         </main>
+        <footer id="footer">
+            <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">Save&Close</button>
+            <button type="button" class="btn btn-outline-secondary" style="margin:0px 5px 0px;">Cancel</button>
+        </footer>
 </body>
 </html>
