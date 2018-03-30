@@ -37,6 +37,7 @@ release2
 # my add(~/* is vscode settings(help me) )
 node_modules/
 ~/*
+ibus-setup-*-linux-x64/
 
 # below is github/Node.gitignore settings
 # Logs
