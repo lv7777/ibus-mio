@@ -81,7 +81,7 @@
           <td v-for="key in columns"
           contenteditable
           @click.shift.exact="selectanddeletethisentry(entry,trindex)"
-          @click.ctrl.exact="changevalue"
+          @click.ctrl.exact="changevalue(trindex)"
           @blur="savedb(entry)"
           >
             {{entry[key]}}
@@ -160,14 +160,12 @@
         savedb: function(entry){
             console.log("write save code")
         },
-        // changevalue: function(value,key,ev){
-        changevalue: function(ev){
-            //document.getElementById('').getAttribute('sampleAttr');
-            console.log(ev)
-            ev.target.parentElement.className="bg-info"
-            demo.gridData.splice(2,1)
-            console.log(ev.target.parentElement.className)
-            //this.contenteditable='true'
+         changevalue: function(index){
+            window.event.target.parentElement.classList.toggle("bg-info");
+            // FIXME(lv7777): event fire timing is warong
+            if(window.confirm('delete this line?')){
+                demo.gridData.splice(index,1)
+            }
         }
       }
     })
