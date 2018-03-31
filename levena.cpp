@@ -3,7 +3,7 @@
 // ibus.hにはibusengine.hやらglibc.hやらがincludeされてる
 #include<ibus.h>
 #include<stdio.h>
-// #include"configloader.hpp"
+#include"configloader.hpp"
 // prototype declaration
 
 #define IS_ALPHA(c) (((c) >= IBUS_a && (c) <= IBUS_z) ||  ((c) >= IBUS_A && (c) <= IBUS_Z))
@@ -235,8 +235,8 @@ static IBusEngineClass *iec;
 gchar *IMEname = "ibus-levena";
 
 // read config
-// printf("loading...");
-// load_config();
+printf("loading...");
+load_config();
 
 bus = ibus_bus_new();
 factory = ibus_factory_new(ibus_bus_get_connection(bus));

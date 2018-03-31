@@ -1,6 +1,6 @@
 // Copyright [2018] <Madoka Kaname and Homura Akemi>
 // g++ configloader.cpp -l jansson
-#include"configloader.hpp"
+#include "configloader.hpp"
 
 int parseDic(const char *dir, string fname) {
     // cout<<string(dir)+"/"+fname<<endl;
@@ -49,7 +49,7 @@ void load_config() {
     json_decref(version);
 }
 
-int main() {
-    load_config();
-    return 0;
-}
+// int main() {
+//     load_config();
+//     return 0;
+// }
