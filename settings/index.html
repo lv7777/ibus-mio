@@ -10,6 +10,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+
     <title>IBus-MIO Settings</title>
     <style>
     #footer {
@@ -41,7 +44,7 @@
                 <!--タブのコンテンツ部分-->
                 <div class="tab-content">
                 <div id="general" class="tab-pane">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/photo1.jpg" alt="" class="img-fluid">
+
                 </div>
                 <div id="pwdmgr" class="tab-pane">
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/photo2.jpg" alt="" class="img-fluid">
@@ -52,10 +55,158 @@
                 <div id="userdic" class="tab-pane">
                         <div class="starter-template mx-auto text-center"> 
                             <div style="margin: 10px 0px 10px 0px;">
-                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">import</button>
-                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">export</button>
+
+                                <div class="form-inline mx-auto">
+                                    <div class="form-group mx-auto" style="margin-right: 10px !important;">
+                                        <select class="custom-select" >
+                                            <option selected>import from...</option>
+                                            <option value="1">google style</option>
+                                            <option value="2">ms ime style</option>
+                                            <option value="3">ibus-levena style</option>
+                                          </select>
+                                    </div>
+                                    <div class="form-group mx-auto" style="margin-left: 10px !important;">
+                                        <select class="custom-select">
+                                            <option selected>export to...</option>
+                                            <option value="1">google style</option>
+                                            <option value="2">ms ime style</option>
+                                            <option value="3">ibus-levena style</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <!-- <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">import from...</button>
+                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">export to...</button> -->
                             </div>
 
+
+<!-- component template -->
+<script type="text/x-template" id="grid-template">
+    <table class="table table-sm" style="margin-top: 20px;">
+      <thead>
+        <tr>
+          <th v-for="key in columns"
+            @click="sortBy(key)"
+            :class="{ active: sortKey == key }"
+            scope="col"
+            >
+            {{ key | capitalize }}
+            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(entry,trindex) in filteredData">
+          <td v-for="key in columns"
+          contenteditable
+          @click.shift.exact="selectanddeletethisentry(entry,trindex)"
+          @click.ctrl.exact="changevalue(trindex)"
+          @blur="savedb(trindex,key)"
+          >
+            {{entry[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
+  
+  <!-- demo root element -->
+  <div id="demo">
+    <form id="search">
+      Search <input name="query" v-model="searchQuery">
+    </form>
+    <demo-grid
+      :data="gridData"
+      :columns="gridColumns"
+      :filter-key="searchQuery">
+    </demo-grid>
+  </div>
+  <script>
+        // register the grid component
+    Vue.component('demo-grid', {
+      template: '#grid-template',
+      props: {
+        data: Array,
+        columns: Array,
+        filterKey: String
+      },
+      data: function () {
+        var sortOrders = {}
+        this.columns.forEach(function (key) {
+          sortOrders[key] = 1
+        })
+        return {
+          sortKey: '',
+          sortOrders: sortOrders
+        }
+      },
+      computed: {
+        filteredData: function () {
+          var sortKey = this.sortKey
+          var filterKey = this.filterKey && this.filterKey.toLowerCase()
+          var order = this.sortOrders[sortKey] || 1
+          var data = this.data
+          if (filterKey) {
+            data = data.filter(function (row) {
+              return Object.keys(row).some(function (key) {
+                return String(row[key]).toLowerCase().indexOf(filterKey) > -1
+              })
+            })
+          }
+          if (sortKey) {
+            data = data.slice().sort(function (a, b) {
+              a = a[sortKey]
+              b = b[sortKey]
+              return (a === b ? 0 : a > b ? 1 : -1) * order
+            })
+          }
+          return data
+        }
+      },
+      filters: {
+        capitalize: function (str) {
+          return str.charAt(0).toUpperCase() + str.slice(1)
+        }
+      },
+      methods: {
+        sortBy: function (key) {
+          this.sortKey = key
+          this.sortOrders[key] = this.sortOrders[key] * -1
+        },
+        selectanddeletethisentry: function(key,i){
+            console.log(demo)
+        },
+        savedb: function(entry,key){
+            console.log("write save code")
+            demo.gridData[entry][key]=window.event.target.innerText
+            console.log(demo.gridData)
+        },
+         changevalue: function(index){
+            window.event.target.parentElement.classList.toggle("bg-info");
+            // FIXME(lv7777): event fire timing is warong
+            if(window.confirm('delete this line?')){
+                demo.gridData.splice(index,1)
+            }
+        }
+      }
+    })
+    
+    // bootstrap the demo
+    var demo = new Vue({
+      el: '#demo',
+      data: {
+        searchQuery: '',
+        gridColumns: ['yomi', 'word','hinsi','comment','freq'],
+        gridData: [
+          { yomi: 'Chuck Norris', word: 'a', hinsi:'1',comment:'test',freq:'0.6' },
+          { yomi: 'Bruce Lee', word: 'b',hinsi:'1',comment:'above',freq:'0.8' },
+          { yomi: 'Jackie Chan', word: 'c',hinsi:'1',comment:'forget',freq:'0.4' },
+          { yomi: 'Jet Li', word: 'd',hinsi:'1',comment:'aaa',freq:'0.3' }
+        ]
+      }
+    })
+    </script>
+<!-- 
                                 <table class="table table-sm">
                                         <thead>
                                           <tr>
@@ -84,7 +235,7 @@
                                             <td>@twitter</td>
                                           </tr>
                                         </tbody>
-                                      </table>
+                                      </table> -->
                         </div>
                 </div>
                 <div id="about" class="tab-pane active">
