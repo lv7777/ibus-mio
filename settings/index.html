@@ -44,7 +44,7 @@
                 <!--タブのコンテンツ部分-->
                 <div class="tab-content">
                 <div id="general" class="tab-pane">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/photo1.jpg" alt="" class="img-fluid">
+
                 </div>
                 <div id="pwdmgr" class="tab-pane">
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/photo2.jpg" alt="" class="img-fluid">
@@ -55,8 +55,27 @@
                 <div id="userdic" class="tab-pane">
                         <div class="starter-template mx-auto text-center"> 
                             <div style="margin: 10px 0px 10px 0px;">
-                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">import</button>
-                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">export</button>
+
+                                <div class="form-inline mx-auto">
+                                    <div class="form-group mx-auto" style="margin-right: 10px !important;">
+                                        <select class="custom-select" >
+                                            <option selected>import from...</option>
+                                            <option value="1">google style</option>
+                                            <option value="2">ms ime style</option>
+                                            <option value="3">ibus-levena style</option>
+                                          </select>
+                                    </div>
+                                    <div class="form-group mx-auto" style="margin-left: 10px !important;">
+                                        <select class="custom-select">
+                                            <option selected>export to...</option>
+                                            <option value="1">google style</option>
+                                            <option value="2">ms ime style</option>
+                                            <option value="3">ibus-levena style</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <!-- <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">import from...</button>
+                                <button type="button" class="btn btn-outline-primary" style="margin:0px 5px 0px">export to...</button> -->
                             </div>
 
 
