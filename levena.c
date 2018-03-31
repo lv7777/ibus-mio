@@ -3,7 +3,7 @@
 // ibus.hにはibusengine.hやらglibc.hやらがincludeされてる
 #include<ibus.h>
 #include<stdio.h>
-//#include"configloader.hpp"
+// #include"configloader.hpp"
 // prototype declaration
 
 #define IS_ALPHA(c) (((c) >= IBUS_a && (c) <= IBUS_z) ||  ((c) >= IBUS_A && (c) <= IBUS_Z))
@@ -16,7 +16,7 @@ void print_handler(const gchar* message) {
 }
 
 void registerComponent(IBusBus *);
-static gboolean ibus_levena_engine_process_key_event(IBusEngine *, guint, guint, guint, gpointer);
+static gboolean ibus_levena_engine_process_key_event(IBusEngine *, guint, guint, guint);
 void ibus_levena_engine_property_activate(IBusEngine*, const gchar*, guint);  // create panel
 // void ibus_levena_engine_focus_in(IBusLevenaEngine*);//create panel
 // I will migrate to levena.h
@@ -80,11 +80,12 @@ void ibus_levena_engine_init(IBusLevenaEngine *klass) {
     klass->table = ibus_lookup_table_new(9, 0, TRUE, TRUE);
 }
 
-void ibus_levena_engine_focus_in(IBusLevenaEngine *klass) {  // create panel
+void ibus_levena_engine_focus_in(IBusEngine *klass) {  // create panel
+    IBusLevenaEngine *ile = (IBusLevenaEngine *) klass;
     ibus_warning("signal_focusin");
-    ibus_levena_engine_create_property_list(klass);
+    ibus_levena_engine_create_property_list(ile);
     ibus_warning("proplist created!");
-    ibus_engine_register_properties((IBusEngine *)klass, klass->proplist);
+    ibus_engine_register_properties(klass, ile->proplist);
     ibus_warning("proplist registered!!");
 }  // end of create panel
 
@@ -162,7 +163,7 @@ ibus_levena_engine_update(IBusLevenaEngine *klass) {
 
 // catch the process-key-event signal from ibus_init
 static gboolean ibus_levena_engine_process_key_event(
-    IBusEngine *ie, guint keyval, guint keycode, guint state, gpointer user_data) {
+    IBusEngine *ie, guint keyval, guint keycode, guint state) {
 
     IBusLevenaEngine *levenaengine = (IBusLevenaEngine *)ie;
     // g_print ("ok?");
@@ -219,13 +220,9 @@ void ibus_levena_engine_property_activate(
 }  // create pannel
 
 int main(int argc, char **argv) {
-// g_set_print_handler (print_handler);
-// g_print ("g_set_print_handler\n");
-// gchar *dbg="test"
-ibus_warning("main func");
-ibus_init();  // 絶対必要。
+// ibus_warning("main func");
+ibus_init();
 
-// 必要なibus_系の宣言
 IBusBus *bus;
 IBusFactory *factory;
 // component: imeエンジンの説明、作者、バージョン等。通常xmlから読み込む
@@ -238,8 +235,8 @@ static IBusEngineClass *iec;
 gchar *IMEname = "ibus-levena";
 
 // read config
-//printf("loading...");
-//load_config();
+// printf("loading...");
+// load_config();
 
 bus = ibus_bus_new();
 factory = ibus_factory_new(ibus_bus_get_connection(bus));
