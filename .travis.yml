@@ -19,7 +19,7 @@ before_script:
   - cd settings && npm install && cd ../
 script:
   - g++ --version
-  - cpplint --linelength=100 --filter=-readability/casting,-build/namespaces *
+  - cpplint --linelength=100 --filter=-readability/casting,-build/namespaces,-build/header_guard *
   - gcc levena.c $(pkg-config ibus-1.0 --cflags --libs)
   - make build
  # - xvfb-run ./release
