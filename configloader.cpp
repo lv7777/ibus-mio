@@ -1,12 +1,6 @@
-// Copyright [2018] <lv7777>
+// Copyright [2018] <Madoka Kaname and Homura Akemi>
 // g++ configloader.cpp -l jansson
-#include<jansson.h>
-#include <dirent.h>
-#include<iostream>
-#include<fstream>
-#include<string>
-
-using namespace std;
+#include"configloader.hpp"
 
 int parseDic(const char *dir, string fname) {
     // cout<<string(dir)+"/"+fname<<endl;
@@ -23,7 +17,7 @@ int parseDic(const char *dir, string fname) {
     return 0;
 }
 
-int main() {
+void load_config() {
     json_t *config;
     json_t *version;
     const char *dir;
@@ -53,4 +47,9 @@ int main() {
     }
     json_decref(config);
     json_decref(version);
+}
+
+int main() {
+    load_config();
+    return 0;
 }

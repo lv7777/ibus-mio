@@ -1,4 +1,4 @@
-// Copyright [2018] <lv7777>
+// Copyright [2018] <Mirakurun at Chinachu>
 
 #include<gtk/gtk.h>
 #include<stdlib.h>

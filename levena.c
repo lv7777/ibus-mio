@@ -1,8 +1,9 @@
-// Copyright [2018] <Copyright lv7777>"
+// Copyright [2018] <Copyright lv7777 with Kuina chan>"
 // TODO(lv7777) :move to levena.c
 // ibus.hにはibusengine.hやらglibc.hやらがincludeされてる
 #include<ibus.h>
 #include<stdio.h>
+//#include"configloader.hpp"
 // prototype declaration
 
 #define IS_ALPHA(c) (((c) >= IBUS_a && (c) <= IBUS_z) ||  ((c) >= IBUS_A && (c) <= IBUS_Z))
@@ -15,7 +16,7 @@ void print_handler(const gchar* message) {
 }
 
 void registerComponent(IBusBus *);
-gboolean ibus_levena_engine_process_key_event(IBusEngine *, guint, guint, guint, gpointer);
+static gboolean ibus_levena_engine_process_key_event(IBusEngine *, guint, guint, guint, gpointer);
 void ibus_levena_engine_property_activate(IBusEngine*, const gchar*, guint);  // create panel
 // void ibus_levena_engine_focus_in(IBusLevenaEngine*);//create panel
 // I will migrate to levena.h
@@ -160,7 +161,7 @@ ibus_levena_engine_update(IBusLevenaEngine *klass) {
 
 
 // catch the process-key-event signal from ibus_init
-gboolean ibus_levena_engine_process_key_event(
+static gboolean ibus_levena_engine_process_key_event(
     IBusEngine *ie, guint keyval, guint keycode, guint state, gpointer user_data) {
 
     IBusLevenaEngine *levenaengine = (IBusLevenaEngine *)ie;
@@ -231,11 +232,14 @@ IBusFactory *factory;
 IBusComponent *component;
 
 // カスタムIMEのエンジンの追加。こいつをIBusEngineClassに変換する。
-IBusLevenaEngineClass *levenaengine;
+static  IBusLevenaEngineClass *levenaengine;
 // process_key_event登録用のエンジンクラス。詳細不明
-IBusEngineClass *iec;
+static IBusEngineClass *iec;
 gchar *IMEname = "ibus-levena";
 
+// read config
+//printf("loading...");
+//load_config();
 
 bus = ibus_bus_new();
 factory = ibus_factory_new(ibus_bus_get_connection(bus));
