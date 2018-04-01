@@ -1,7 +1,7 @@
 language: cpp
 compiler:
   - gcc
-sudo: false
+sudo: true
 branches:
   only: 
     - master
@@ -11,6 +11,7 @@ addons:
     - python-pip
     - libibus-1.0-dev
     - gtk+-2.0
+    - ninja-build
     - xvfb
 #   xvfb is need open display(electron,gtktes)
 before_script:
@@ -24,7 +25,7 @@ before_script:
   - autoreconf -fi
   - ./configure
   - make
-  - make install
+  - sudo make install
   - cd ..
 
 script:
