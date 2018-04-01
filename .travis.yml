@@ -18,6 +18,7 @@ before_script:
   - pip install --user cpplint
   - nvm install 4.6.0
   - cd settings && npm install && cd ../
+  - npm install -g electron-package
 
 # prepare libjansson
   - git clone https://github.com/akheron/jansson.git --depth=1
