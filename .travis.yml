@@ -19,8 +19,16 @@ before_script:
   - cd settings && npm install && cd ../
 script:
   - g++ --version
+# - lint test
+  - cd settings && npm test && cd ../
   - cpplint --linelength=100 --filter=-readability/casting,-build/namespaces,-build/header_guard *
-  - gcc levena.c $(pkg-config ibus-1.0 --cflags --libs)
-  - make build
- # - xvfb-run ./release
-  - cd settings && npm test
+# - build test
+  - mkdir ../kisaragi && cd ../kisaragi
+  - cmake ../ibus-mio
+  - make
+  - make settingbuild
+# - TODO(lv7777): make install test(depend with ibus)
+# - TODO(lv7777): ibus-mio recognition(ibus list-engine) test(depend with ibus)
+# - TODO(lv7777): ./ibus-mio up test(help me how to kill)
+# - TODO(lv7777): ./ibus-setup-mio up test(help me how to kill)
+# - xvfb-run ./release
