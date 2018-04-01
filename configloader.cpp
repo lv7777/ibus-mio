@@ -22,7 +22,7 @@ void load_config() {
     json_t *version;
     const char *dir;
     json_error_t err;
-    config = json_load_file("mio_config.json", 0, &err);
+    config = json_load_file(IME_NAME"-config.json", 0, &err);
     if (config != NULL) {
         version = json_object_get(config, "config_version");
         printf("version:%s\n", json_string_value(version));

@@ -55,7 +55,7 @@ static void ibus_levena_engine_create_property_list(IBusLevenaEngine *levena) { 
 IBusText *label, *tooltip;
     label = ibus_text_new_from_static_string("debug test");
         tooltip = ibus_text_new_from_static_string("test!!");  // cleate ibus text
-        gchar *name = "gcharname";
+        const gchar *name = "gcharname";
         prop = ibus_property_new(name,
                                  PROP_TYPE_RADIO,
                                  label,
@@ -79,6 +79,17 @@ void ibus_levena_engine_init(IBusLevenaEngine *klass) {
     klass->cursor_pos = 0;
     klass->table = ibus_lookup_table_new(9, 0, TRUE, TRUE);
 }
+
+// DONE!!!:
+// optimize cmake(when cmake ../ibus-mio && make && install && ibus restart,
+// auto configured(mio-config.json,dir,skin,mio.xml,ibus-mio,ibus-setup-mio is setted))
+
+// convert table is implemented
+// convert table from dic is implemented
+
+// skin(setting bgcolor,bgimage,icon,and main future is when moji wo utu,animation is fired)
+
+// implement libkkc
 
 void ibus_levena_engine_focus_in(IBusEngine *klass) {  // create panel
     IBusLevenaEngine *ile = (IBusLevenaEngine *) klass;
@@ -232,7 +243,9 @@ IBusComponent *component;
 static  IBusLevenaEngineClass *levenaengine;
 // process_key_event登録用のエンジンクラス。詳細不明
 static IBusEngineClass *iec;
-gchar *IMEname = "ibus-levena";
+
+const gchar *fullIMEname = "ibus-"IME_NAME;
+cout << string(fullIMEname)+" is started!!" << endl;
 
 // read config
 printf("loading...");
@@ -242,9 +255,9 @@ bus = ibus_bus_new();
 factory = ibus_factory_new(ibus_bus_get_connection(bus));
 // todo:下の理解。ime側エンジンを作成する。addするわけではない。例えばstructとかの宣言とかを省けるんじゃないかな？
 // とりあえずibus_factory_create_engineとibus_factory_add_engineは違う。
-// ibus_factory_create_engine(factory,IMEname);
+// ibus_factory_create_engine(factory,fullIMEname);
 // TODO(lv7777): engineタイプの追加。
-ibus_factory_add_engine(factory, IMEname, IBUS_TYPE_LEVENA_ENGINE);
+ibus_factory_add_engine(factory, fullIMEname, IBUS_TYPE_LEVENA_ENGINE);
 
 registerComponent(bus);
 
@@ -252,7 +265,8 @@ ibus_main();
 }
 
 void registerComponent(IBusBus *bus) {
-    gchar *filepath = "./levena.xml";
+    const gchar *filepath = "/usr/share/ibus/component/"IME_NAME".xml";
+    cout << string("full path is")+filepath << endl;
     IBusComponent *component;
     component = ibus_component_new_from_file(filepath);
     if (!component) {

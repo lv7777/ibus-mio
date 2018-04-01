@@ -11,3 +11,7 @@
 using namespace std;
 extern int parseDic(const char *, string);
 extern void load_config();
+
+#ifndef IME_NAME
+#define IME_NAME "levena"
+#endif  // IME_NAME
