@@ -38,7 +38,7 @@ script:
   - mkdir ../kisaragi && cd ../kisaragi
   - cmake ../ibus-mio
   - make
-  - make settingbuild
+  - sudo make settingbuild
 # - TODO(lv7777): make install test(depend with ibus)
 # - TODO(lv7777): ibus-mio recognition(ibus list-engine) test(depend with ibus)
 # - TODO(lv7777): ./ibus-mio up test(help me how to kill)
