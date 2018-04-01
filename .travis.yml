@@ -17,6 +17,16 @@ before_script:
   - pip install --user cpplint
   - nvm install 4.6.0
   - cd settings && npm install && cd ../
+
+# prepare libjansson
+  - git clone https://github.com/akheron/jansson.git --depth=1
+  - cd jansson
+  - autoreconf -fi
+  - ./configure
+  - make
+  - make install
+  - cd ..
+
 script:
   - g++ --version
 # - lint test
