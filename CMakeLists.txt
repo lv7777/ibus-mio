@@ -31,7 +31,7 @@ ADD_CUSTOM_TARGET(settingbuild
     COMMAND cd settings && sed -i".org" -e \"s/\\\([\\\"\\']name[\\\"\\']\\s*:\\s*[\\\"\\']ibus-setup-\\\).*\\\([\\\"\\']\\\)/\\1${IME_NAME}\\2/\" package.json
     COMMAND cd settings && npm install
     COMMAND cd settings && npm install -g electron-package
-    COMMAND cd settings && electron-packager .
+    COMMAND cd settings && sudo electron-packager .
     COMMAND cd settings && npm test
     COMMAND cd settings && ln -s /ibus-setup-${IME_NAME}-linux-x64/ibus-setup-${IME_NAME} /usr/libexec/ibus-setup-${IME_NAME}
 )
