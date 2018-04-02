@@ -16,7 +16,7 @@
             <language>ja</language>
             <license>MPL-2.0</license>
             <author>ryouyu oonuma (aka lv7777)</author>
-            <icon>/usr/share/ibus/component/levena.jpg</icon>
+            <icon>/usr/share/ibus/component/ibus-levena.jpg</icon>
             <layout>jp</layout>
             <longname>Levena</longname>
             <description>IBus Levena Input Method</description>

@@ -33,11 +33,11 @@ ADD_CUSTOM_TARGET(settingbuild
     COMMAND cd settings && npm install -g electron-package
     COMMAND cd settings && sudo electron-packager .
     COMMAND cd settings && npm test
-    COMMAND cd settings && ln -s /ibus-setup-${IME_NAME}-linux-x64/ibus-setup-${IME_NAME} /usr/libexec/ibus-setup-${IME_NAME}
+    COMMAND cd settings && ln -s ${PROJECT_BINARY_DIR}/settings/ibus-setup-${IME_NAME}-linux-x64/ibus-setup-${IME_NAME} /usr/libexec/ibus-setup-${IME_NAME}
 )
 
 install(FILES levena.jpg DESTINATION /usr/share/ibus/component/ RENAME ibus-${IME_NAME}.jpg)
-install(FILES levena.xml DESTINATION /usr/share/ibus/component/ RENAME ${IME_NAME}.xml)
 install(FILES mio-config.json DESTINATION ${PROJECT_BINARY_DIR} RENAME ${IME_NAME}-config.json)
 
 install(FILES ${PROJECT_BINARY_DIR}/ibus-${IME_NAME} DESTINATION /usr/libexec RENAME ibus-engine-${IME_NAME})
+install(FILES ${PROJECT_BINARY_DIR}/levena.xml DESTINATION /usr/share/ibus/component/ RENAME ${IME_NAME}.xml)
