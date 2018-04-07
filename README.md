@@ -48,8 +48,8 @@ ibus engine ibus-mio
 ### debug running
 
 ビルド、インストール後に
-`vim /usr/share/ibus/component/mio.xml`
-<exec>/usr/libexec/ibus-engine-mio</exec>の行を<exec></exec>とする
+`vim /usr/share/ibus/component/mio.xml`で編集。
+`<exec>/usr/libexec/ibus-engine-mio</exec>`の行を`<exec></exec>`として保存
 ```
 ibus restart
 ibus list-engine | grep mio
