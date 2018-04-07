@@ -199,7 +199,7 @@ static gboolean ibus_levena_engine_process_key_event(
         // mod1(alt)key
         return FALSE;
     }
-
+    
 // アルファベットの場合
     if (IS_ALPHA(keyval)) {
         ibus_warning("is_alpha");
@@ -248,8 +248,8 @@ const gchar *fullIMEname = "ibus-"IME_NAME;
 cout << string(fullIMEname)+" is started!!" << endl;
 
 // read config
-printf("loading...");
-load_config();
+//printf("loading...");
+//load_config();
 
 bus = ibus_bus_new();
 factory = ibus_factory_new(ibus_bus_get_connection(bus));

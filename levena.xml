@@ -12,7 +12,7 @@
 
     <engines>
         <engine>
-            <name>levena</name>
+            <name>ibus-levena</name>
             <language>ja</language>
             <license>MPL-2.0</license>
             <author>ryouyu oonuma (aka lv7777)</author>

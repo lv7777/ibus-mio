@@ -1,4 +1,5 @@
 set(IME_NAME mio)
+set(BIG_IME_NAME Mio)
 cmake_minimum_required(VERSION 2.6)
 project(ibus-${IME_NAME})
 set(CMAKE_CXX_FLAGS "-Wall -DIME_NAME='\"${IME_NAME}\"'")
@@ -21,7 +22,7 @@ add_custom_target(run ALL
     cp -r ${PROJECT_SOURCE_DIR}/levena.xml ${PROJECT_BINARY_DIR}
     COMMAND echo "configure ibus xml files for ${IME_NAME}"
     COMMAND sed -i".org" -e \"s/levena/${IME_NAME}/\" levena.xml
-    COMMAND sed -i".org" -e \"s/Levena/${IME_NAME}/\" levena.xml
+    COMMAND sed -i".org" -e \"s/Levena/${BIG_IME_NAME}/\" levena.xml
 )
 
 ADD_CUSTOM_TARGET(settingbuild
@@ -39,5 +40,5 @@ ADD_CUSTOM_TARGET(settingbuild
 install(FILES levena.jpg DESTINATION /usr/share/ibus/component/ RENAME ibus-${IME_NAME}.jpg)
 install(FILES mio-config.json DESTINATION ${PROJECT_BINARY_DIR} RENAME ${IME_NAME}-config.json)
 
-install(FILES ${PROJECT_BINARY_DIR}/ibus-${IME_NAME} DESTINATION /usr/libexec RENAME ibus-engine-${IME_NAME})
+install(TARGETS ${PROJECT_BINARY_DIR}/ibus-${IME_NAME} DESTINATION /usr/libexec RENAME ibus-engine-${IME_NAME})
 install(FILES ${PROJECT_BINARY_DIR}/levena.xml DESTINATION /usr/share/ibus/component/ RENAME ${IME_NAME}.xml)
